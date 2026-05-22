@@ -6,7 +6,7 @@
 - [ ] Rodar `./scripts/deploy_vps.sh root@72.61.63.197 dominio.com.br`.
 - [ ] Confirmar `nginx -t` sem erros.
 - [ ] Validar `/health` retornando `ok`.
-- [ ] Emitir SSL com Certbot.
+- [ ] Confirmar HTTPS no domínio principal.
 - [ ] Conferir headers básicos de segurança.
 - [ ] Testar versão mobile.
 - [ ] Testar botão de WhatsApp.
