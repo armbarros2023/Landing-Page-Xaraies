@@ -22,7 +22,7 @@ TMP_CONF="/tmp/xaraies-landing.conf"
 if [ "$DOMAIN" = "_" ]; then
   SERVER_NAMES="_"
 else
-  SERVER_NAMES="$DOMAIN www.$DOMAIN"
+  SERVER_NAMES="$DOMAIN"
 fi
 
 echo "==> Validando arquivos locais..."
@@ -37,7 +37,7 @@ echo "==> Preparando configuração do Nginx..."
 sed "s/__SERVER_NAMES__/$SERVER_NAMES/g" deploy/nginx-xaraies.conf > "$TMP_CONF"
 
 echo "==> Instalando dependências e criando diretório na VPS..."
-ssh "$SERVER" "apt-get update && apt-get install -y nginx rsync && mkdir -p '$TMP_DIR' '$SITE_DIR'"
+ssh "$SERVER" "apt-get update && apt-get install -y nginx rsync certbot python3-certbot-nginx && mkdir -p '$TMP_DIR' '$SITE_DIR'"
 
 echo "==> Enviando release para $SERVER..."
 rsync -az --delete "${LOCAL_FILES[@]}" "$SERVER:$TMP_DIR/"
@@ -46,16 +46,14 @@ scp "$TMP_CONF" "$SERVER:/tmp/xaraies-landing.conf"
 echo "==> Publicando release e recarregando Nginx..."
 ssh "$SERVER" "rsync -a --delete '$TMP_DIR/' '$SITE_DIR/' && cp /tmp/xaraies-landing.conf /etc/nginx/sites-available/xaraies-landing && ln -sf /etc/nginx/sites-available/xaraies-landing /etc/nginx/sites-enabled/xaraies-landing && nginx -t && systemctl reload nginx"
 
-echo "==> Deploy HTTP concluído."
+if [ "$DOMAIN" != "_" ]; then
+  echo "==> Configurando HTTPS com Certbot para $DOMAIN..."
+  ssh "$SERVER" "certbot --nginx -d '$DOMAIN' --redirect --non-interactive --agree-tos --register-unsafely-without-email && nginx -t && systemctl reload nginx"
+fi
+
+echo "==> Deploy concluído."
 if [ "$DOMAIN" = "_" ]; then
   echo "Acesse pelo IP da VPS ou pelo domínio apontado para ela."
 else
-  echo "Acesse: http://$DOMAIN"
-fi
-echo ""
-if [ "$DOMAIN" != "_" ]; then
-  echo "Depois que o DNS do domínio já estiver apontando para a VPS, rode:"
-  echo "ssh $SERVER"
-  echo "apt-get install -y certbot python3-certbot-nginx"
-  echo "certbot --nginx -d $DOMAIN -d www.$DOMAIN"
+  echo "Acesse: https://$DOMAIN"
 fi
