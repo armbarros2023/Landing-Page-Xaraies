@@ -28,4 +28,4 @@ Sem domínio definido ainda, publique pelo IP/default server:
 ./scripts/deploy_vps.sh root@72.61.63.197
 ```
 
-O deploy publica a landing em `/var/www/xaraies-landing`, instala/valida a configuração Nginx e recarrega o serviço. Depois que o DNS estiver apontando para a VPS, emita o SSL com Certbot conforme a mensagem final do script.
+O deploy publica a landing em `/var/www/xaraies-landing`, instala/valida a configuração Nginx, configura HTTPS com Certbot quando um domínio é informado e recarrega o serviço.
