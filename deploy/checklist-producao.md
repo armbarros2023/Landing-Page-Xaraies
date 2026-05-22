@@ -10,6 +10,6 @@
 - [ ] Conferir headers básicos de segurança.
 - [ ] Testar versão mobile.
 - [ ] Testar botão de WhatsApp.
-- [ ] Testar QR Code.
+- [ ] Confirmar ausência de QR Code e textos antigos de acesso ao site.
 - [ ] Adicionar Google Tag Manager, Meta Pixel ou Google Analytics, se necessário.
 - [ ] Configurar backup do projeto no GitHub.
