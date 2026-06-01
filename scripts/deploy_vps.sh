@@ -28,9 +28,9 @@ fi
 echo "==> Validando arquivos locais..."
 test -f index.html
 if [ -d assets ]; then
-  LOCAL_FILES=(index.html assets)
+  LOCAL_FILES=(index.html xaraies-1.html xaraies-2.html assets)
 else
-  LOCAL_FILES=(index.html)
+  LOCAL_FILES=(index.html xaraies-1.html xaraies-2.html)
 fi
 
 echo "==> Preparando configuração do Nginx..."
