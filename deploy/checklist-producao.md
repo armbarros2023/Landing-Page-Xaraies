@@ -1,15 +1,15 @@
-# Checklist de produção
+# Checklist de publicação
 
-- [ ] Confirmar domínio/subdomínio final.
-- [ ] Apontar DNS tipo A para o IP da VPS.
-- [ ] Testar landing localmente.
-- [ ] Rodar `./scripts/deploy_vps.sh root@72.61.63.197 dominio.com.br`.
-- [ ] Confirmar `nginx -t` sem erros.
+- [ ] Confirmar a pasta pública de `xaraies.arbtechinfo.online`.
+- [ ] Testar a página localmente em desktop e celular.
+- [ ] Enviar os arquivos e as pastas de publicação indicados no README.
+- [ ] Confirmar que estilos, JavaScript, imagens e fontes retornam HTTP 200.
 - [ ] Validar `/health` retornando `ok`.
-- [ ] Confirmar HTTPS no domínio principal.
-- [ ] Conferir headers básicos de segurança.
-- [ ] Testar versão mobile.
-- [ ] Testar botão de WhatsApp.
-- [ ] Confirmar ausência de QR Code e textos antigos de acesso ao site.
-- [ ] Adicionar Google Tag Manager, Meta Pixel ou Google Analytics, se necessário.
-- [ ] Configurar backup do projeto no GitHub.
+- [ ] Confirmar HTTPS no domínio.
+- [ ] Abrir e fechar o menu móvel, inclusive por teclado.
+- [ ] Testar links de navegação e campos obrigatórios.
+- [ ] Conferir o destino do WhatsApp sem enviar mensagem de teste automaticamente.
+- [ ] Limpar o cache da hospedagem se a versão anterior continuar aparecendo.
+- [ ] Conferir visualmente a página pública.
+
+Para VPS com Nginx, a configuração fornecida é opcional. Confirme o servidor explicitamente, valide `nginx -t` e recarregue somente o serviço necessário. Não altere DNS quando o domínio já estiver corretamente conectado à hospedagem escolhida.

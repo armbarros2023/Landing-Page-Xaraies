@@ -27,11 +27,10 @@ fi
 
 echo "==> Validando arquivos locais..."
 test -f index.html
-if [ -d assets ]; then
-  LOCAL_FILES=(index.html xaraies-1.html xaraies-2.html assets)
-else
-  LOCAL_FILES=(index.html xaraies-1.html xaraies-2.html)
-fi
+LOCAL_FILES=(index.html original.css melhorias.css fonts.css site.js images fonts robots.txt health)
+for file in "${LOCAL_FILES[@]}"; do
+  test -e "$file" || { echo "Arquivo necessário ausente: $file"; exit 1; }
+done
 
 echo "==> Preparando configuração do Nginx..."
 sed "s/__SERVER_NAMES__/$SERVER_NAMES/g" deploy/nginx-xaraies.conf > "$TMP_CONF"
